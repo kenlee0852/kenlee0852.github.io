@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <title>Owlsome Sales Demo</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/main.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">Owlsome Sales Demo</a>
+      </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+      <div class="form-inline mt-5">
+        <label for="supplierName" class="mr-2">Supplier Name:</label>
+        <input type="text" class="form-control mr-4" id="supplierName" />
+
+        <label for="productName" class="mr-2">Product Name:</label>
+        <input type="text" class="form-control mr-4" id="productName" />
+
+        <button id="submitBtn" type="submit" class="btn btn-primary">
+          Submit
+        </button>
+      </div>
+      <div class="table-wrapper-scroll-y my-custom-scrollbar mt-4"
+      >
+        <table id="table" class="table table-bordered invisible">
+          <thead class="thead-dark">
+            <tr>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Foo</th>
+              <th>Bar</th>
+            </tr>
+          </thead>
+          <tbody id="table-content"></tbody>
+        </table>
+      </div>
+    </div>
+    <script>
+      let endpoint =
+        'https://fcc-weather-api.glitch.me/api/current?lat=35&lon=139';
+      let mockItem = {
+        name: 'name',
+        description: 'description',
+        foo: 'foo',
+        bar: 'bar',
+      };
+      let mockItems = [];
+      for (let i = 0; i < 5; i++) mockItems.push(mockItem);
+      function fetchData() {
+        fetch(endpoint)
+          .then((response) => response.json())
+          .then(function (data) {
+            console.log(data);
+            buildTable(mockItems);
+          });
+      }
+      function buildTable(items) {
+        let content = '';
+        let keys = ['name', 'description', 'foo', 'bar'];
+        for (let item of items) {
+          content += '<tr>';
+          for (let key of keys) {
+            content += `<td>${item[key]}</td>`;
+          }
+          content += '</tr>';
+        }
+        document.getElementById('table').classList.remove('invisible');
+        document.getElementById('table-content').innerHTML = content;
+      }
+      document.getElementById('submitBtn').addEventListener('click', fetchData);
+    </script>
+  </body>
+</html>
