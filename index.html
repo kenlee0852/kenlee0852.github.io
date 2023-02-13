@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=100%, initial-scale=1">
+    <title>Happy Valentine's Day</title>
+    <link href="css/main.min.css" rel="stylesheet" type="text/css">
+    <link rel="Shortcut Icon" href="favicon.ico" />
+    <link rel="preload" href="img/1.jpg" as="image">
+    <link rel="preload" href="img/2.jpg" as="image">
+    <link rel="preload" href="img/3.jpg" as="image">
+    <link rel="preload" href="img/4.jpg" as="image">
+    <link rel="preload" href="img/5.jpg" as="image">
+    <link rel="preload" href="img/6.jpg" as="image">
+    <link rel="preload" href="img/7.jpeg" as="image">
+    <link rel="preload" href="img/8.jpeg" as="image">
+    <link rel="preload" href="img/result.jpg" as="image">
+</head>
+
+<body>
+    <div id="mobile" :class="{ 'has-prompt': hasPrompt }">
+        <div id="mobile-head">
+            <div id="mobile-head-title">與坤樸聊天中</div>
+        </div>
+        <div id="mobile-body">
+            <div id="mobile-body-bg"></div>
+            <div id="mobile-body-content">
+                <div id="mock-msg-row" class="msg-row">
+                    <div id="mock-msg" class="msg" v-html="latestMsgContent"></div>
+                </div>
+                <div class="msg-row" v-for="(msg, index) in messages" :key="index"
+                    :class="msg.author === 'author' ? 'msg-author' : 'msg-me'">
+                    <div class="msg" :class="'msg-bounce-in-' + (msg.author === 'author' ? 'left': 'right')"
+                        :style="msg.width && msg.height && {width: msg.width - 26 + 'px', height: msg.height - 18 + 'px'}"
+                        v-html="msg.content"></div>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-foot">
+            <div id="prompt">
+                <div id="prompt-head">
+                    <div class="say-something">我想說……</div>
+                    <a href="javascript:;" class="close-btn" v-on:click="togglePrompt(false)"></a>
+                </div>
+                <div id="prompt-body">
+                    <ul class="responses" v-if="lastDialog">
+                        <li v-for="res in lastDialog.responses">
+                            <a href="javascript:;" v-on:click="respond(res)">{{ res.content }}</a>
+                        </li>
+                    </ul>
+                    <div class="next-topic" v-if="!lastDialog || !lastDialog.responses">
+                        <ul class="topics">
+                            <li v-for="topic in nextTopics">
+                                <a href="javascript:;" v-on:click="ask(topic)">{{ topic.brief }}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div id="input-hint" class="say-something"
+                :class="{'clickable': !isTyping }" v-if="!lastDialog">
+                <span v-if="!isTyping">我想説……</span>
+                <span v-if="isTyping">坤樸正在输入中</span>
+            </div>
+            <div id="input-hint" class="say-something" v-if="lastDialog">
+                <a href="img/result.jpg" target="_blank">點我點我點我點我</a>
+            </div>
+        </div>
+        <div id="prompt-bg" v-on:click="togglePrompt(false)"></div>
+    </div>
+    <script src="lib/zepto.min.js"></script>
+    <script src="lib/vue.min.js"></script>
+    <script src="src/index.js"></script>
+    <!--
+        # 樂觀鎖, 悲觀鎖
+        BFK-1201
+        2022.7.17 高台山 first day
+        櫻桃 藍莓 奇異果
+        背後hug
+        早上不洗臉 只沖水
+        冰球樂團 Jin縉 Ching g squad
+        不喜歡50嵐
+        陳星雲喜歡阿波
+        李玖哲 secret
+        鋼管吃上半身力量
+        熱情答應媺雅，順他的意就會正循環（ex: 要不要吃飯＝＞要）
+        法蘭德斯酸愛爾  (Flemish Sour Ale)
+        討厭苗栗（討厭的人是苗栗人）
+        討厭50嵐是因為英國藍倒了
+        討厭嘉義
+        盧廣仲 高中學長 開價100萬
+        喜歡膠質 海參 豬腳
+        31冰淇淋
+        喜歡mollifix（服飾）
+        最愛的餅乾：東京牛奶起司工房
+    -->
+
+    <!--
+        好希望能夠繼續做你的筆記嗚嗚嗚嗚嗚,
+        我真的好愛你嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚,
+        希望我們未來還有機會在一起！！！
+    -->
+</body>
+
+</html>
